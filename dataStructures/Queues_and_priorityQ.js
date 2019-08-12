@@ -43,4 +43,58 @@ console.log(line.front);
 line.print();
 
 
+//priority queue 
 
+function PQueue(){
+    var pqCollection = [];
+
+    //prints the PQ
+    this.print = function(){
+        console.log(pqCollection);
+    };
+
+    this.pqEnqueue = function(element){
+        if(this.isEmpty()){
+            pqCollection.push(element);
+        } else {
+            var added = false;
+            for(var i = 0; i < pqCollection.length; i++){
+                //checking priorites [1] is the element that has the priority
+                if(element[1] < pqCollection[i][1]){
+                    //splice will add the element 
+                    pqCollection.splice(i,0,element);
+                    added = true;
+                    break;
+                }
+            }
+            if(!added){
+                pqCollection.push(element);
+            }
+        }
+    };
+
+    this.pqDQ = function(){
+        var value = pqCollection.shift();
+        return value[0];
+    };
+
+    this.front = function(){
+        return pqCollection[0];
+    };
+
+    this.size = function(){
+        return pqCollection.length;
+    };
+
+    this.isEmpty = function(){
+        return(pqCollection.length ===0);
+    }
+}
+var pq = new PQueue();
+pq.pqEnqueue(['faith', 2]);
+pq.pqEnqueue(['Jonathan', 1]);
+pq.pqEnqueue(['Coby', 3]);
+pq.print();
+pq.pqDQ();
+pq.front();
+pq.print();
