@@ -103,7 +103,44 @@ class BST {
                 if(node.left == null && node.righ == null){
                     return null;
                 }
+                //has no left child
+                if(node.left == null){
+                    return node.right;
+                }
+                //has no right child
+                if(node.right == null){
+                    return node.left;
+                }
+                var tempNode = node.right;
+                while(tempNode.left !== null){
+                    tempNode = tempNode.left;
+                }
+                node.data = tempNode.data;
+                node.right = removeNode(node.left, data);
+                return node;
+            } else{
+                node.right = removeNode(node.right, data);
+                return node;
             }
         }
+        this.root = removeNode(this.root, data);
     }
 }
+
+//testing out our data structure
+const bst = new BST();
+
+bst.add(4);
+bst.add(2);
+bst.add(1);
+bst.add(3);
+bst.add(6);
+bst.add(5);
+bst.add(7);
+
+bst.remove(6);
+console.log(bst.findMax);
+console.log(bst.findMin);
+console.log(bst.findMax);
+console.log(bst.isPresent(6));
+console.log(bst.isPresent(2));
